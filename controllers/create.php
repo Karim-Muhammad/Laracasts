@@ -14,12 +14,13 @@
 
     $errors = [];
     // Empty string Case
-    if(!Validator::isstring($content)) {
-      $errors["body"] = Validator::getErrorMessage();
+    if(!Validator::string($content)) {
+      $errors["body"] = Validator::getErrorMessage("string");
     }
 
     if(count($errors) > 0) {
       // header("Location: /notes/create");
+      $heading = "Create Note";
       require_once "views/create.view.php";
       return;
     }
