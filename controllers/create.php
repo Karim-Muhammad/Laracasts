@@ -15,12 +15,7 @@
     $errors = [];
     // Empty string Case
     if(!Validator::isstring($content)) {
-      $errors["body"] = "content is required (cannot be empty)";
-    }
-
-    // Length Case
-    if(strlen($content) >= 1000) {
-      $errors["body"] = "content must be less than 1000 characters";
+      $errors["body"] = Validator::getErrorMessage();
     }
 
     if(count($errors) > 0) {
