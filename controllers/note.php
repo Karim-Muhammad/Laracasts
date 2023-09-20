@@ -1,13 +1,13 @@
 <?php
-    require_once "Response.php";
-    require_once "Database.php";
-    $config = require_once "config.php";
+    require_once "helpers/Response.php";
+    require_once "helpers/Database.php"; // (required in index.php)
+    $config = require_once "helpers/config.php";
     $db = new Database($config["database"]);
 
     $id = $_GET["id"];
     $note = $db->query("SELECT * FROM notes where id = :id", ["id" => $id])->findOrAbort();
     // we created new mthod to combine fetching and aborting logic in one method
-
+    
     $heading = "Note";
 
     /**

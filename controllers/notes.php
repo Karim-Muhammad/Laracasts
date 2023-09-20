@@ -1,7 +1,7 @@
 <?php
-    require_once "Response.php";
-    require_once "Database.php";
-    $config = require_once "config.php";
+    require_once "helpers/Response.php";
+    require_once "helpers/Database.php"; //(required in index.php)
+    $config = require_once "helpers/config.php";
     $db = new Database($config["database"]);
 
     //$notes = $db->query("SELECT * FROM notes where user_id = 3")->findAll();

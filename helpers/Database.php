@@ -42,4 +42,8 @@
 
             return $results;
         }
+
+        public function sql() {
+            return $this->statement->execute();
+        }
     }

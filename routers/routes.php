@@ -1,30 +1,6 @@
 <?php
 
-    require_once "helpers.php";
-    require_once "Database.php";
-
-    $current_uri = $_SERVER["REQUEST_URI"];
-    $URI = parse_url($current_uri);
-    $PATH = $URI["path"];
-    //dd($PATH);
-
-
-
-// refactor 0
-/*
-    if($URI['path'] === "/")
-        require_once "controllers/index.php";
-    elseif ($URI['path'] === "/about")
-        require_once "controllers/about.php";
-    elseif ($URI['path'] === "/contact")
-        require_once "controllers/contact.php";
-    else
-//        require_once "views/error_view.php";
-*/
-
-
-    // refactor 1
-    $routes = [
+    return [
         "/" => [
             "name" => "Home",
             "controller" => "controllers/index.php",
@@ -50,6 +26,3 @@
             "controller" => "controllers/create.php"
         ]
     ];
-
-
-    routeToController($URI['path'], $routes);
