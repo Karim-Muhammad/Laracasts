@@ -1,6 +1,7 @@
 <?php
-    require_once base_path("helpers/Response.php");
-    require_once base_path("helpers/Database.php"); // (required in index.php)
+    // Now i used spl_autoload_register in public/index.php
+    // require_once base_path("helpers/Response.php");
+    // require_once base_path("helpers/Database.php"); // (required in index.php)
     $config = require_once base_path("helpers/config.php");
 
     $db = new Database($config["database"]);
@@ -9,7 +10,6 @@
     $note = $db->query("SELECT * FROM notes where id = :id", ["id" => $id])->findOrAbort();
     // we created new mthod to combine fetching and aborting logic in one method
     
-    $heading = "Note";
 
     /**
      * Magic Numbers
@@ -24,4 +24,7 @@
 
     authorize($note["user_id"] !== CURRENT_USER_ID);
 
-    require view("notes/show");
+    view("notes/show.view.php", [
+        "heading" => "Note",
+        "note" => $note,
+    ]);

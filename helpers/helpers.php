@@ -30,12 +30,18 @@
         return ROOT . $path;
     }
 
-    function view(string $path, ?array $data = []) {
-        extract($data);
-        return base_path("views/$path.view.php");
-    }
-
     function controller(string $path) {
         // require_once base_path("controllers/$path.php");
         return base_path($path);
+    }
+
+    function view(string $path, ?array $data = []):void {
+        extract($data);
+        require_once base_path("views/$path");
+        return;
+    }
+
+    function partial(string $path) {
+        require_once base_path("views/partials/$path");
+        return;
     }

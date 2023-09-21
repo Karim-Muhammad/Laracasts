@@ -2,4 +2,4 @@
 
     $heading = 'About';
 
-    require_once view("about");
+    view("about.view.php", compact('heading'));
