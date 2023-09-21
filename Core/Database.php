@@ -30,12 +30,6 @@
 
             return $this;
         }
-        public function find() {
-            return $this->statement->fetch();
-        }
-        public function findAll() {
-            return $this->statement->fetchAll();
-        }
         public function findOrAbort() {
             $results = $this->statement->fetch();
             if($results === false) {
@@ -47,7 +41,7 @@
         public function findAllOrAbort() {
             $results = $this->statement->fetchAll();
             if(count($results) === 0) {
-                Response::abort(Response::NOT_FOUND);
+                \Core\Response::abort(Response::NOT_FOUND); // can used, but not necessary, because we in same namespace
             }
 
             return $results;

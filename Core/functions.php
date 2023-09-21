@@ -4,7 +4,7 @@
 
     function dd($value) {
         echo "<pre>";
-        print_r($value);
+            print_r($value);
         echo "</pre>";
 
         die();
@@ -14,12 +14,13 @@
         if (array_key_exists($uri, $routes))
             require_once controller($routes[$uri]["controller"]);
         else
-            \Core\Response::abort(Response::NOT_FOUND);
+            \Core\Response::abort(\Core\Response::NOT_FOUND);
     }
 
-    function authorize(bool $condition): void {
+    function authorize(bool $condition): bool{
         if($condition = false)
-            Core\Response::abort(Response::UNAUTHORIZED);
+            Core\Response::abort(\Core\Response::UNAUTHORIZED);
+        return true;
     }
 
     function base_path($path) {

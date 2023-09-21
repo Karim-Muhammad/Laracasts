@@ -8,6 +8,10 @@
         $content = "Looks like you've found the doorway to the great nothing";
     elseif($error_code === 403)
         $content = "Sorry, You don't have permission to access this page";
+    elseif($error_code === 401)
+        $content = "Unauthorized!";
+    elseif($error_code === 500)
+        $content = "Internal Server Error!";
     else
         $content = "Something went wrong!";
 ?>
@@ -29,9 +33,6 @@
                             <a href="/">Take me there!</a>
                         </button>
                     </div>
-                </div>
-                <div>
-                    <img src="https://i.ibb.co/G9DC8S0/404-2.png" />
                 </div>
             </div>
         </div>

@@ -10,8 +10,12 @@
 
         public static function abort(?int $code = 404): void {
             http_response_code($code);
-            $error_code = $code;
-            require_once "views/error_view.php";
+
+            view("error_view.php", [
+                "heading" => "Error $code",
+                "error_code" => $code,
+            ]);
+
             die();
         }
     }
