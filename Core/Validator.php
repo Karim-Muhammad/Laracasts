@@ -1,5 +1,7 @@
 <?php
 
+  namespace Core;
+
   class Validator {
 
     // Pure function not depend on any state, we translate it in OOP to `static` method
@@ -33,7 +35,7 @@
         return strlen($password) >= $min && strlen($password) <= $max;
     }
 
-    static public function getErrorMessage(?string $key):string {
+    static public function getErrorMessage(?string $key):array|string {
 
       if(func_num_args() === 0) {
         return self::$error_messages;

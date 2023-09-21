@@ -1,9 +1,9 @@
 <?php
 
-  // Now i used spl_autoload_register in public/index.php
-  // require_once base_path("helpers/Validator.php");
-  // require_once base_path("helpers/Database.php");
-  $config = require_once base_path("helpers/config.php");
+  use \Core\Database;
+  use \Core\Validator;
+
+  $config = require_once base_path("Core/config.php");
 
   if($_SERVER["REQUEST_METHOD"] === "GET") {
     view("notes/create.view.php", [

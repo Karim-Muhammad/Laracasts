@@ -1,10 +1,10 @@
 <?php
-    // Now i used spl_autoload_register in public/index.php
-    // require_once base_path("helpers/Response.php");
-    // require_once base_path("helpers/Database.php"); // (required in index.php)
-    $config = require_once base_path("helpers/config.php");
 
-    $db = new Database($config["database"]);
+    use \Core as C; // but if we have another class with same name in another namespace, we can use alias
+    
+    $config = require_once base_path("Core/config.php");
+
+    $db = new C\Database($config["database"]);
 
     $id = $_GET["id"];
     $note = $db->query("SELECT * FROM notes where id = :id", ["id" => $id])->findOrAbort();
