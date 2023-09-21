@@ -1,7 +1,8 @@
 <?php
-    require_once "helpers/Response.php";
-    require_once "helpers/Database.php"; // (required in index.php)
-    $config = require_once "helpers/config.php";
+    require_once base_path("helpers/Response.php");
+    require_once base_path("helpers/Database.php"); // (required in index.php)
+    $config = require_once base_path("helpers/config.php");
+
     $db = new Database($config["database"]);
 
     $id = $_GET["id"];
@@ -23,4 +24,4 @@
 
     authorize($note["user_id"] !== CURRENT_USER_ID);
 
-    require "views/note.view.php";
+    require view("notes/show");

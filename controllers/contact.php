@@ -2,4 +2,4 @@
 
     $heading = 'Contact';
 
-    require "views/contact.view.php";
+    require_once view("contact");

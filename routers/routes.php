@@ -15,14 +15,14 @@
         ],
         "/notes" => [
             "name" => "Notes",
-            "controller" => "controllers/notes.php",
+            "controller" => "controllers/notes/index.php",
         ], // put ! before the route to make it private
         "/note" => [
             "name" => "!Note",
-            "controller" => "controllers/note.php"
+            "controller" => "controllers/notes/show.php"
         ],
         "/notes/create" => [
             "name" => "!Create Note",
-            "controller" => "controllers/create.php"
+            "controller" => "controllers/notes/create.php"
         ]
     ];

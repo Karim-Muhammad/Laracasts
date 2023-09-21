@@ -1,6 +1,7 @@
 <?php
-    require_once "partials/head.php";
-    require_once "partials/nav.php";
+   require view('partials/head');
+   require view('partials/nav');
+   require view('partials/banner');
 
     $content = "";
     if($error_code === 404)
@@ -40,5 +41,5 @@
     </div>
 
 <?php
-    require_once "partials/footer.php"
+    require_once view("partials/footer")
 ?>

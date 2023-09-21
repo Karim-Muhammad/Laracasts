@@ -2,4 +2,4 @@
 
     $heading = 'About';
 
-    require "views/about.view.php";
+    require_once view("about");

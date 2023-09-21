@@ -1,36 +1,41 @@
 <?php
 
-  require_once "helpers/Validator.php";
-  $config = require_once "helpers/config.php";
-  require_once "helpers/Database.php";
+  require_once base_path("helpers/Validator.php");
+  require_once base_path("helpers/Database.php");
+  $config = require_once base_path("helpers/config.php");
 
   if($_SERVER["REQUEST_METHOD"] === "GET") {
     $heading = "Create Note";
-    require_once "views/create.view.php";
+    require_once view("notes/create");
     return;
-  }else if($_SERVER["REQUEST_METHOD"] === "POST") {
+  }
+  
+  if($_SERVER["REQUEST_METHOD"] === "POST") {
     $db = new Database($config["database"]);
     $content = $_POST["note-content"];
 
     $errors = [];
-    // Empty string Case
+
     if(!Validator::string($content)) {
-      $errors["body"] = Validator::getErrorMessage("string");
+      $errors["string"] = Validator::getErrorMessage("string");
     }
 
     if(count($errors) > 0) {
-      // header("Location: /notes/create");
+      dd("There are errors");
+      $errors = [];
       $heading = "Create Note";
-      require_once "views/create.view.php";
+      require_once view("notes/create");
       return;
     }
 
     $db->query("INSERT INTO notes (id, content, user_id) VALUES (NULL, :content, 1)", [
       "content" => htmlspecialchars($content),
-      // "user_id" => $_POST["user_id"]
     ]);
 
-    header("Location: /notes");
+    
+    // dd("Location: ".view("notes/index"));
+    // header("Location: ".view("notes/index")); // will go to /notes and execute index.php then execute function routeToController
+    header("Location: /notes"); // will go to /notes and execute index.php then execute function routeToController
   }
 
   /**

@@ -2,4 +2,4 @@
 
     $heading = "Home";
 
-    require "views/index.view.php";
+    require_once view("index");
