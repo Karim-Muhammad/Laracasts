@@ -4,10 +4,13 @@
     $router->get("/about", "controllers/about.php", routable: true, name: "About");
     $router->get("/contact", "controllers/contact.php", routable: true, name: "Contact");
     $router->get("/notes", "controllers/notes/index.php", routable: true, name: "Notes");
-    $router->get("/note", "controllers/notes/show.php");
+    $router->get("/notes/create", "controllers/notes/create.php", routable: true, name: "Create Note");
 
-    $router->get("/notes/create", "controllers/notes/create.php");
-    $router->post("/notes/create", "controllers/notes/create.php");
+    // try to make a restful api in one endpoint
+    $router->get("/note", "controllers/notes/show.php");
+    $router->post("/note", "controllers/notes/show.php");
+    $router->delete("/note", "controllers/notes/show.php");
+    $router->put("/note", "controllers/notes/show.php");
 
     $router->delete("/notes/delete", "controllers/notes/destroy.php");
 

@@ -19,8 +19,6 @@
     $Uri = $_SERVER["REQUEST_URI"];
     $Method = $_POST["_method"] ?? $_SERVER["REQUEST_METHOD"];
 
-//    echo $Method;
-
     // also there is naming convention for _method is _csrf (cross site request forgery)
 
     $URI = parse_url($Uri);

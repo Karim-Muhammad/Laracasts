@@ -27,12 +27,12 @@
         </ul>
 
         <div class="flex align-center gap-2">
-            <form method="post" action="notes/delete">
+            <form method="post" action="/note">
                 <input type="hidden" name="_method" value="DELETE" />
                 <input type="hidden" name="id" value="<?= $note["id"] ?>">
                 <button data-id="<?=$note["id"]?>" id="btn_delete" class="my-3 w-[100px] px-4 py-2 rounded-md bg-red-400 hover:bg-red-500 text-white" type="submit">Delete</button>
             </form>
-            <form method="post" action="notes/update">
+            <form method="post">
                 <input type="hidden" name="_method" value="UPDATE" />
                 <input type="hidden" name="id" value="<?= $note["id"] ?>">
                 <button data-id="<?=$note["id"]?>" id="btn_update" class="my-3 w-[100px] px-4 py-2 rounded-md bg-slate-500 text-white hover:bg-slate-600" type="submit">Edit</button>
