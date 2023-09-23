@@ -1,9 +1,7 @@
 <?php
-    global $routes;
-    $ROUTES = array_filter($routes, fn($route) => !str_starts_with($route["name"], "!"));
-
-    // i remove all links that have ! in them (see routes.php)
+    global $routes_links;
 ?>
+
 <nav class="bg-gray-800">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-16 items-center justify-between">
@@ -14,8 +12,8 @@
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                        <?php foreach($ROUTES as $link => $info) : ?>
-                            <a href="<?= $link ?>" class= "<?= $info["name"] === $heading? "bg-gray-900 text-white" : "text-gray-300" ?> hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium" aria-current="page"><?= $info["name"] ?></a>
+                        <?php foreach($routes_links as $link => $name) : ?>
+                            <a href="<?= $link ?>" class= "<?= $name === $heading? "bg-gray-900 text-white" : "text-gray-300" ?> hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium" aria-current="page"><?= $name ?></a>
                         <?php endforeach; ?>
                     </div>
                 </div>

@@ -1,14 +1,12 @@
 <?php
-    require_once "Response.php";
-    require_once "Database.php";
-    $config = require_once "config.php";
-    $db = new Database($config["database"]);
+
+    $db = \Core\App::resolve("Core\Database");
+
 
     $id = $_GET["id"];
     $note = $db->query("SELECT * FROM notes where id = :id", ["id" => $id])->findOrAbort();
     // we created new mthod to combine fetching and aborting logic in one method
-
-    $heading = "Note";
+    
 
     /**
      * Magic Numbers
@@ -23,4 +21,9 @@
 
     authorize($note["user_id"] !== CURRENT_USER_ID);
 
-    require "views/note.view.php";
+    view("notes/show.view.php", [
+        "heading" => "Note",
+        "note" => $note,
+    ]);
+
+    exit();

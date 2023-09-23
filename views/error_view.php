@@ -1,12 +1,17 @@
 <?php
-    require_once "partials/head.php";
-    require_once "partials/nav.php";
+   require_once base_path("views/partials/head.view.php");
+   require_once base_path("views/partials/nav.view.php");
+   require_once base_path("views/partials/banner.view.php");
 
     $content = "";
     if($error_code === 404)
         $content = "Looks like you've found the doorway to the great nothing";
     elseif($error_code === 403)
         $content = "Sorry, You don't have permission to access this page";
+    elseif($error_code === 401)
+        $content = "Unauthorized!";
+    elseif($error_code === 500)
+        $content = "Internal Server Error!";
     else
         $content = "Something went wrong!";
 ?>
@@ -29,9 +34,6 @@
                         </button>
                     </div>
                 </div>
-                <div>
-                    <img src="https://i.ibb.co/G9DC8S0/404-2.png" />
-                </div>
             </div>
         </div>
         <div>
@@ -40,5 +42,5 @@
     </div>
 
 <?php
-    require_once "partials/footer.php"
+    require_once base_path("views/partials/footer.view.php")
 ?>

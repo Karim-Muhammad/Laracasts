@@ -1,5 +1,15 @@
 <?php
 
+    namespace Core;
+    // every function call without namespace quilifer will be default namespace is current namespace
+    // so PDO is \Core\PDO , but in our namespace there is no PDO function
+    // we need use PDO of PHP, so we need to use `\PDO`
+    // so each line has PDO we should replace it with "\PDO"
+    // but this solution is not good because of repetitive, so we need to use `use` keyword instead
+
+    use \PDO; // Global Namespace or Root Namespace
+    // === use PDO; ===
+
     class Database
     {
         public $connection;
@@ -20,12 +30,6 @@
 
             return $this;
         }
-        public function find() {
-            return $this->statement->fetch();
-        }
-        public function findAll() {
-            return $this->statement->fetchAll();
-        }
         public function findOrAbort() {
             $results = $this->statement->fetch();
             if($results === false) {
@@ -37,9 +41,12 @@
         public function findAllOrAbort() {
             $results = $this->statement->fetchAll();
             if(count($results) === 0) {
-                Response::abort(Response::NOT_FOUND);
+                \Core\Response::abort(Response::NOT_FOUND); // can used, but not necessary, because we in same namespace
             }
 
             return $results;
+        }
+        public function sql() {
+            return $this->statement->execute();
         }
     }
