@@ -5,7 +5,7 @@
 
 <main>
     <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-      <form method="post" action="create">
+      <form method="POST" action="/notes">
         <input name="user_id" value="1" type="hidden"/>
         <textarea name='note-content' class="w-full p-4 h-[50vh]" placeholder="Enter Your Note Here"></textarea>
         <p class="text-xs text-red-500"><?= $errors["string"] ?? "" ?></p>

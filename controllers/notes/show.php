@@ -28,3 +28,5 @@
         "heading" => "Note",
         "note" => $note,
     ]);
+
+    exit();

@@ -1,20 +1,36 @@
 <?php
 
-    if($_SERVER["REQUEST_METHOD"] === "GET") {
-        $id = $_GET["id"];
-        $config = require_once base_path("Core/config.php");
-        $db = new \Core\Database($config["database"]);
+    $config = require_once base_path("Core/config.php");
+    $db = new \Core\Database($config["database"]);
 
-        $note = $db->query("SELECT * from notes WHERE id = :id", [
-            "id" => $id,
-        ])->findOrAbort();
+    $id = $_POST["id"];
+    $content = $_POST["note-content"];
 
-        authorize($note["user_id"] === 1); // current_userid = 1
+    $note = $db->query("SELECT * from notes WHERE id = :id", [
+        "id" => $id,
+    ])->findOrAbort();
 
+    authorize($note["user_id"] === 1); // current_userid = 1
+
+    // Check length of content
+
+    if(strlen($content) < 5) {
+        //$_SESSION["errors"]["content"] = "Content must be at least 5 characters long";
+        //header("Location: /note?id=$id");
         view("notes/edit.view.php", [
+            "heading" => "Edit Note",
             "note" => $note,
+            "errors" => [
+                "string" => "Content must be at least 5 characters long",
+            ],
         ]);
-
-        die();
+        exit();
     }
 
+    $db->query("UPDATE notes SET content = :content WHERE id = :id", [
+        "id" => $id,
+        "content" => $content,
+    ]);
+
+    header("Location: /notes");
+    exit();

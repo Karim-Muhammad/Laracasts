@@ -70,11 +70,13 @@
             return [];
         }
         public function route(string $path, string $method):void {
+            session_start();
             $route = $this->findRoute($path, $method);
 
             if(!$route)
                 Response::abort(Response::NOT_FOUND);
 
+            $Method = $method;
             require_once base_path($route["controller"]);
         }
     }
