@@ -46,19 +46,16 @@ class Router
     public function delete($uri, $controller, ?string $name = null, ?bool $routable = null)
     {
         $route = $this->add("DELETE", $uri, $controller, $name);
-        ;
         return $this;
     }
     public function put($uri, $controller, ?string $name = null, ?bool $routable = null)
     {
         $route = $this->add("PUT", $uri, $controller, $name);
-        ;
         return $this;
     }
     public function patch($uri, $controller, ?string $name = null, ?bool $routable = null)
     {
         $route = $this->add("PATCH", $uri, $controller, $name);
-        ;
         return $this;
     }
 
