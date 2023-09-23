@@ -8,8 +8,8 @@
 
 <main>
     <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-        <form method="POST" action="/notes">
-            <input name="_method" value="PUT" type="hidden"/>
+        <form method="POST" action="/note">
+            <input name="_method" value="PATCH" type="hidden"/>
             <input name="user_id" value="1" type="hidden"/>
             <input name="id" value="<?=$note["id"]?>" type="hidden"/>
 
@@ -17,6 +17,8 @@
             <p class="font-xs text-red-500"><?= $errors["errors"]["content"] ?? "" ?></p>
             <p class="text-xs text-red-500"><?= $errors["string"] ?? "" ?></p>
             <input type="submit" value="Update" class='cursor-pointer px-6 py-3 my-3 bg-green-300 hover:bg-green-400 rounded-lg'/>
+
+            <a href="/note?id=<?= $note['id'] ?>" class="cursor-pointer px-6 py-3 my-3 bg-gray-200 hover:bg-gray-300 rounded-lg">Cancel</a>
         </form>
     </div>
 </main>

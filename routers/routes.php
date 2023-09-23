@@ -13,13 +13,13 @@
     $router->get("/notes/create", "controllers/notes/create.php");
     $router->post("/notes", "controllers/notes/store.php");
 
-    $router->get("/notes/edit", "controllers/notes/edit.php");
-    $router->put("/notes", "controllers/notes/update.php");
-
-    $router->delete("/notes", "controllers/notes/destroy.php");
-
     // ============================== Note ==============================
     $router->get("/note", "controllers/notes/show.php");
+
+    $router->get("/note/edit", "controllers/notes/edit.php");
+    $router->patch("/note", "controllers/notes/update.php");
+
+    $router->delete("/note", "controllers/notes/destroy.php");
 
 
 
