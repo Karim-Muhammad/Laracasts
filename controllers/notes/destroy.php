@@ -2,7 +2,8 @@
 
     use Core\App;
 
-    $db = App::container()->resolve("Core\Database");
+     $db = App::resolve(\Core\Database::class); // Equivalent to the below line
+    // $db = App::resolve("Core\Database"); // Equivalent to the above line
 
     $note = $db->query("SELECT * FROM notes WHERE id = :id", [
         "id" => $_POST["id"],

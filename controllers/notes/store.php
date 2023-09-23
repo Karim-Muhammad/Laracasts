@@ -2,7 +2,7 @@
 
     use \Core\Validator;
 
-    $db = \Core\App::container()->resolve("Core\Database");
+    $db = \Core\App::resolve("Core\Database");
 
     $content = $_POST["note-content"];
 

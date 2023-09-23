@@ -1,6 +1,6 @@
 <?php
 
-    $db = \Core\App::container()->resolve("Core\Database");
+    $db = \Core\App::resolve("Core\Database");
 
     $id = $_POST["id"]; // Weird, right? see file show.view.php
 
