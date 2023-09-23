@@ -1,35 +1,36 @@
 <?php
 
-    $db = \Core\App::resolve("Core\Database");
+use Core\Validator;
 
-    $id = $_POST["id"];
-    $content = $_POST["note-content"];
+$db = \Core\App::resolve("Core\Database");
 
-    $note = $db->query("SELECT * from notes WHERE id = :id", [
-        "id" => $id,
-    ])->findOrAbort();
+$id = $_POST["id"];
+$content = $_POST["note-content"];
 
-    authorize($note["user_id"] === 1); // current_userid = 1
+$note = $db->query("SELECT * from notes WHERE id = :id", [
+    "id" => $id,
+])->findOrAbort();
 
-    // Check length of content
+authorize($note["user_id"] === 1); // current_userid = 1
 
-    if(strlen($content) < 5) {
-        //$_SESSION["errors"]["content"] = "Content must be at least 5 characters long";
-        //header("Location: /note?id=$id");
-        view("notes/edit.view.php", [
-            "heading" => "Edit Note",
-            "note" => $note,
-            "errors" => [
-                "string" => "Content must be at least 5 characters long",
-            ],
-        ]);
-        exit();
-    }
-
-    $db->query("UPDATE notes SET content = :content WHERE id = :id", [
-        "id" => $id,
-        "content" => $content,
+// Check length of content
+if (Validator::string($content)) {
+    //$_SESSION["errors"]["content"] = "Content must be at least 5 characters long";
+    //header("Location: /note?id=$id");
+    view("notes/edit.view.php", [
+        "heading" => "Edit Note",
+        "note" => $note,
+        "errors" => [
+            "string" => Validator::getErrorMessage("string"),
+        ],
     ]);
-
-    header("Location: /notes");
     exit();
+}
+
+$db->query("UPDATE notes SET content = :content WHERE id = :id", [
+    "id" => $id,
+    "content" => purify($content),
+]);
+
+header("Location: /notes");
+exit();
