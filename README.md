@@ -52,3 +52,13 @@ but still this Container doesn't appear in Controllers Functions, because  we re
 
 so now scope is changed entirly, so what next? we need repeat what we did in `bootstrap.php` file again in all Controllers functions again??!!
 so why we routed this path at the beginning?! right? YES, next branch we will explore `App` Class and how it works and how it can help us to solve this problem.
+
+
+### App Class
+App class will help us to solve the problem of scope, so we will not repeat what we did in `bootstrap.php` file again in all Controllers functions again.
+we just `App::container(<name-of-container>)` and will grap this container in any place in our application.
+
+but before that we need do multiple things
+
+after we bind container we need `App::setContainer(container)`;
+after that we can use this App in Whole Application and resolve what we want

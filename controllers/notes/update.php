@@ -1,7 +1,6 @@
 <?php
 
-//    $config = require_once base_path("Core/config.php");
-//    $db = new \Core\Database($config["database"]);
+    $db = \Core\App::container()->resolve("Core\Database");
 
     $id = $_POST["id"];
     $content = $_POST["note-content"];

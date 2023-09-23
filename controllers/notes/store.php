@@ -2,9 +2,7 @@
 
     use \Core\Validator;
 
-//    use \Core\Database;
-//    $config = require_once base_path("Core/config.php");
-//    $db = new Database($config["database"]);
+    $db = \Core\App::container()->resolve("Core\Database");
 
     $content = $_POST["note-content"];
 

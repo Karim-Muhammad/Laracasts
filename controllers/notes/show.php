@@ -1,9 +1,7 @@
 <?php
 
-//    use \Core as C; // but if we have another class with same name in another namespace, we can use alias
-//
-//    $config = require_once base_path("Core/config.php");
-//    $db = new C\Database($config["database"]);
+    $db = \Core\App::container()->resolve("Core\Database");
+
 
     $id = $_GET["id"];
     $note = $db->query("SELECT * FROM notes where id = :id", ["id" => $id])->findOrAbort();

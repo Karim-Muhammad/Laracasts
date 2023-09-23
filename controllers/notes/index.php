@@ -1,10 +1,6 @@
 <?php
-    use \Core\Container;
-    $c = new Container();
-    dd($c->resolve("Core\Database"));
 
-    // $config = require_once base_path("Core/config.php");
-    // $db = new \Core\Database($config["database"]);
+    $db = \Core\App::container()->resolve("Core\Database");
 
     // $notes = $db->query("SELECT * FROM notes where user_id = 3")->findAll();
     $notes = $db->query("SELECT * FROM notes where user_id = 1")->findAllOrAbort();
