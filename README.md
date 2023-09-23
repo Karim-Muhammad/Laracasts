@@ -8,7 +8,7 @@
 > A dependency is an object that can be used (a service). An injection is the passing of a dependency to a dependent object (a client) that would use it. The service is made part of the client's state. Passing the service to the client, rather than allowing a client to build or find the service, is the fundamental requirement of the pattern.
 
 ##### Binding
-> Binding is the process of associating a service container with a class or interface. Binding tells the container how to resolve a class or an interface. Laravel's service container is used to resolve all Laravel controllers.
+> Binding is the process of associating a service container with a builder function or refactory function, we call it like this because this function return object configured and ready to use.
 
 ##### Resolving
 > Resolving is the process of retrieving an instance from the container. You may resolve instances of objects
@@ -44,3 +44,11 @@
 
 تاني هو يعني اي dependency injection، همم؟
 هو اني بدل ما أكرر خطوات الconfiguration انا ببعت الconfig object (dependency) ببعته لل class كـ عملية (Inject) وهو يقوم بالخطوات دي بدل مني
+
+
+
+I created a Container Class and made an object in `bootstrap.php` file and put this file in `public/index.php` 
+but still this Container doesn't appear in Controllers Functions, because  we require theier files in `router->route` method not require thier files in `public/index.php` file!
+
+so now scope is changed entirly, so what next? we need repeat what we did in `bootstrap.php` file again in all Controllers functions again??!!
+so why we routed this path at the beginning?! right? YES, next branch we will explore `App` Class and how it works and how it can help us to solve this problem.

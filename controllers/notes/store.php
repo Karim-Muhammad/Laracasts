@@ -1,11 +1,11 @@
 <?php
 
-    use \Core\Database;
     use \Core\Validator;
 
-    $config = require_once base_path("Core/config.php");
+//    use \Core\Database;
+//    $config = require_once base_path("Core/config.php");
+//    $db = new Database($config["database"]);
 
-    $db = new Database($config["database"]);
     $content = $_POST["note-content"];
 
     $errors = [];

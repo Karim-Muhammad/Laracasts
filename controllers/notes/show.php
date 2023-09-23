@@ -1,10 +1,9 @@
 <?php
 
-    use \Core as C; // but if we have another class with same name in another namespace, we can use alias
-    
-    $config = require_once base_path("Core/config.php");
-
-    $db = new C\Database($config["database"]);
+//    use \Core as C; // but if we have another class with same name in another namespace, we can use alias
+//
+//    $config = require_once base_path("Core/config.php");
+//    $db = new C\Database($config["database"]);
 
     $id = $_GET["id"];
     $note = $db->query("SELECT * FROM notes where id = :id", ["id" => $id])->findOrAbort();

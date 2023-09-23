@@ -1,7 +1,7 @@
 <?php
 
-    $config = require_once base_path("Core/config.php");
-    $db = new \Core\Database($config["database"]);
+//    $config = require_once base_path("Core/config.php");
+//    $db = new \Core\Database($config["database"]);
 
     $id = $_POST["id"];
     $content = $_POST["note-content"];

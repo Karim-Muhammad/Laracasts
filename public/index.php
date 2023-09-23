@@ -10,6 +10,11 @@
         require base_path("$class.php");
     });
 
+    // Setup Container Service
+    require_once base_path("bootstrap.php");
+    // dd($db);
+
+    // Setup Routers
     $router = new Core\Router();
     $routes = require_once base_path("routers/routes.php");
     // for nav views
@@ -19,7 +24,7 @@
     $Uri = $_SERVER["REQUEST_URI"];
     $Method = $_POST["_method"] ?? $_SERVER["REQUEST_METHOD"];
 
-//    echo $Method;
+    // echo $Method;
 
     // also there is naming convention for _method is _csrf (cross site request forgery)
 
