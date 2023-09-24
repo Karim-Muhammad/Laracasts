@@ -5,7 +5,7 @@
             "port" => 3306,
             "user" => "root",
             "dbname" => "mini_notes",
-            "charset" => "utf8mb4"
+            "charset" => "utf8"
         ],
 
         "services" => [

@@ -1,5 +1,10 @@
 <?php
 
-    view("index.view.php", [
-        "heading" => "Home",
-    ]);
+    if($_SESSION["user"]) {
+        view("index.view.php", [
+            "heading" => "Home",
+        ]);
+        exit();
+    }
+
+    redirect("/login");

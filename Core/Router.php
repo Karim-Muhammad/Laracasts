@@ -79,7 +79,6 @@ class Router
     }
     public function route(string $path, string $method): void
     {
-        session_start();
         $route = $this->findRoute($path, $method);
 
         if (!$route)

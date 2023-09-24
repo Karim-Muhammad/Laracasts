@@ -30,6 +30,9 @@
 
             return $this;
         }
+        public function find() {
+            return $this->statement->fetch();
+        }
         public function findOrAbort() {
             $results = $this->statement->fetch();
             if($results === false) {
@@ -38,6 +41,10 @@
 
             return $results;
         }
+
+        public function findAll() {
+            return $this->statement->fetchAll();
+        }
         public function findAllOrAbort() {
             $results = $this->statement->fetchAll();
             if(count($results) === 0) {
@@ -45,8 +52,5 @@
             }
 
             return $results;
-        }
-        public function sql() {
-            return $this->statement->execute();
         }
     }

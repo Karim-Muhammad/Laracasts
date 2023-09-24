@@ -23,9 +23,18 @@ function authorize(bool $condition): bool
     return true;
 }
 
+function abort($code) {
+    return view("errors/error_view.php", ["code" => $code]);
+}
+
 function base_path($path)
 {
     return ROOT . $path;
+}
+
+function redirect($path) {
+    header("Location: $path");
+    exit();
 }
 
 function controller(string $path)

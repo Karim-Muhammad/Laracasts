@@ -14,9 +14,7 @@ $note = $db->query("SELECT * from notes WHERE id = :id", [
 authorize($note["user_id"] === 1); // current_userid = 1
 
 // Check length of content
-if (Validator::string($content)) {
-    //$_SESSION["errors"]["content"] = "Content must be at least 5 characters long";
-    //header("Location: /note?id=$id");
+if (!Validator::string($content)) {
     view("notes/edit.view.php", [
         "heading" => "Edit Note",
         "note" => $note,

@@ -35,6 +35,10 @@
         return strlen($password) >= $min && strlen($password) <= $max;
     }
 
+    static public function custom($value, $callback) {
+        return $callback($value);
+    }
+
     static public function getErrorMessage(?string $key):array|string {
 
       if(func_num_args() === 0) {

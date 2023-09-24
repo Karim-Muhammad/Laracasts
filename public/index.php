@@ -1,5 +1,5 @@
 <?php
-
+    session_start();
     const ROOT = __DIR__ . "/../";
     require_once ROOT . "Core/functions.php";
 //    dd($_SERVER);
