@@ -8,7 +8,7 @@
         "id" => $id,
     ])->findOrAbort();
 
-    authorize($note["user_id"] === 1); // current_userid = 1
+    authorize($note["user_id"] === $_SESSION["user"]['id']); // current_userid = 1
 
     view("notes/edit.view.php", [
         "heading" => "Edit Note",

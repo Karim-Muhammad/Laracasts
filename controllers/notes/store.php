@@ -5,6 +5,7 @@ use \Core\Validator;
 $db = \Core\App::resolve("Core\Database");
 
 $content = $_POST["note-content"];
+$user_id = $_POST["user_id"];
 
 $errors = [];
 
@@ -18,8 +19,9 @@ if (count($errors) > 0) {
     return;
 }
 
-$db->query("INSERT INTO notes (id, content, user_id) VALUES (NULL, :content, 1)", [
+$db->query("INSERT INTO notes (id, content, user_id) VALUES (NULL, :content, :user_id)", [
     "content" => purify($content),
+    "user_id" => $user_id,
 ]);
 
 header("Location: /notes"); // will go to /notes and execute index.php then execute function routeToController

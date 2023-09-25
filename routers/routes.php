@@ -3,12 +3,12 @@
     global $router;
 
 // ============================== Home ==============================
-    $router->get("/", "controllers/index.php", routable: true, name: "Home");
+    $router->get("/", "controllers/index.php", routable: true, name: "Home")->only("auth");
     $router->get("/about", "controllers/about.php", routable: true, name: "About");
     $router->get("/contact", "controllers/contact.php", routable: true, name: "Contact");
 
 // ============================== Notes ==============================
-    $router->get("/notes", "controllers/notes/index.php", routable: true, name: "Notes");
+    $router->get("/notes", "controllers/notes/index.php", routable: true, name: "Notes")->only("auth");
 
     $router->get("/notes/create", "controllers/notes/create.php");
     $router->post("/notes", "controllers/notes/store.php");
@@ -23,16 +23,18 @@
 
 // =============================== Auth ===============================
     $user = $_SESSION["user"] ?? null; // user exist? so true, else false
-    $router->get("/login", "controllers/auth/login.php", routable: !$user, name: "Login");
-    $router->post("/login", "controllers/auth/login.php");
+    $router->get("/login", "controllers/auth/login.php", routable: !$user, name: "Login")->only("guest");
+    $router->post("/login", "controllers/auth/login.php")->only("guest");
 
-    $router->get("/register", "controllers/auth/register.php", routable: !$user, name: "Register");
-    $router->post("/register", "controllers/auth/register.php");
+    $router->get("/register", "controllers/auth/register.php", routable: !$user, name: "Register")->only("guest");
+    $router->post("/register", "controllers/auth/register.php")->only("guest");
 
-    $router->get("/logout", "controllers/auth/logout.php", routable: !!$user, name: "Logout");
+    $router->get("/logout", "controllers/auth/logout.php", routable: !!$user, name: "Logout")->only("auth");
 
 // ============================== Users ==============================
-    $router->get("/profile", "controllers/user/profile.php", routable: !!$user, name: "Profile");
+    $router->get("/profile", "controllers/user/profile.php", routable: !!$user, name: "Profile")->only("auth");
 
+    $router->get("/profile/edit", "controllers/user/edit.php")->only("auth");
+    $router->put("/profile/update", "controllers/user/update.php")->only("auth");
 
     return $router->getRoutes();

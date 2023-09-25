@@ -40,25 +40,32 @@ class Router
     }
     public function post($uri, $controller, ?string $name = null, ?bool $routable = null)
     {
-        $route = $this->add("POST", $uri, $controller, $name);
+        $this->add("POST", $uri, $controller, $name);
         return $this;
     }
     public function delete($uri, $controller, ?string $name = null, ?bool $routable = null)
     {
-        $route = $this->add("DELETE", $uri, $controller, $name);
+        $this->add("DELETE", $uri, $controller, $name);
         return $this;
     }
     public function put($uri, $controller, ?string $name = null, ?bool $routable = null)
     {
-        $route = $this->add("PUT", $uri, $controller, $name);
+        $this->add("PUT", $uri, $controller, $name);
         return $this;
     }
     public function patch($uri, $controller, ?string $name = null, ?bool $routable = null)
     {
-        $route = $this->add("PATCH", $uri, $controller, $name);
+        $this->add("PATCH", $uri, $controller, $name);
         return $this;
     }
 
+    /** Add role to the route, to be authorized
+     * @param $role
+     * @return void
+     */
+    public function only($role) {
+        $this->routes[array_key_last($this->routes)]["role"] = $role;
+    }
 
     public function getRoutes(): array
     {
@@ -72,8 +79,10 @@ class Router
     private function findRoute(string $path, string $method): array
     {
         foreach ($this->routes as $route) {
-            if ($route["uri"] === $path && $route["method"] === $method)
+            if ($route["uri"] === $path && $route["method"] === $method) {
+                \Core\Middlewares\Authorization::handle($route["role"] ?? null);
                 return $route;
+            }
         }
         return [];
     }

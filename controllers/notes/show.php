@@ -12,14 +12,13 @@
      * Magic Numbers
      * They are numbers that have special meaning that didn't declared in our codebase
      */
-    const CURRENT_USER_ID = 1; // hardcoded now, but later we will use Session, Authentication
+    $CURRENT_USER_ID = $_SESSION["user"]['id'] ?? null; // hardcoded now, but later we will use Session, Authentication
 
-    //    no longer needed (new added method findOrAbort())
-    //    if($note === false) {
-    //        abort(404); // Not Found
-    //    }
+    if(!$CURRENT_USER_ID) {
+        (new \Core\Middlewares\Guest)->handle();
+    }
 
-    authorize($note["user_id"] !== CURRENT_USER_ID);
+    authorize($note["user_id"] !== $CURRENT_USER_ID);
 
     view("notes/show.view.php", [
         "heading" => "Note",

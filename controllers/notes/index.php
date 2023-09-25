@@ -3,7 +3,11 @@
     $db = \Core\App::resolve("Core\Database");
 
     // $notes = $db->query("SELECT * FROM notes where user_id = 3")->findAll();
-    $notes = $db->query("SELECT * FROM notes where user_id = 1")->findAllOrAbort();
+    $user_id = $_SESSION["user"]["id"] ?? 1; // ?? 1 not to break the app if the user is not logged in (test)
+
+    $notes = $db->query("SELECT * FROM notes where user_id = :user_id", [
+        "user_id" => $user_id,
+    ])->findAll();
 
     view("notes/index.view.php", [
         "heading" => "Notes",

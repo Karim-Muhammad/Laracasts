@@ -5,13 +5,14 @@ use Core\Validator;
 $db = \Core\App::resolve("Core\Database");
 
 $id = $_POST["id"];
+$user_id = $_POST["user_id"];
 $content = $_POST["note-content"];
 
 $note = $db->query("SELECT * from notes WHERE id = :id", [
     "id" => $id,
 ])->findOrAbort();
 
-authorize($note["user_id"] === 1); // current_userid = 1
+authorize($note["user_id"] === $user_id); // current_userid = 1
 
 // Check length of content
 if (!Validator::string($content)) {
