@@ -2,11 +2,10 @@
     session_start();
     const ROOT = __DIR__ . "/../";
     require_once ROOT . "Core/functions.php";
-//    dd($_SERVER);
+    // dd($_SERVER);
 
-
-    //$routes = require_once base_path("routers/routes.php");
     spl_autoload_register(function ($class) {
+        $class = str_replace("\\", DIRECTORY_SEPARATOR, $class);
         require base_path("$class.php");
     });
 
@@ -17,6 +16,7 @@
     // Setup Routers
     $router = new Core\Router();
     $routes = require_once base_path("routers/routes.php");
+
     // for nav views
     $routes_links = $router->getRoutableLinks();
 

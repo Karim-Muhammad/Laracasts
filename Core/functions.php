@@ -37,10 +37,15 @@ function redirect($path) {
     exit();
 }
 
-function controller(string $path)
-{
-    // require_once base_path("controllers/$path.php");
-    return base_path($path);
+    /** remove all cookies, sessions
+     * @return void
+     */
+function logout() {
+    $_SESSION = [];
+    session_destroy();
+
+    $params = session_get_cookie_params();
+    setcookie("PHPSESSID", "", time() - 1, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
 }
 
 function view(string $path, ?array $data = []): void

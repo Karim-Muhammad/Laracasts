@@ -3,38 +3,38 @@
     global $router;
 
 // ============================== Home ==============================
-    $router->get("/", "controllers/index.php", routable: true, name: "Home")->only("auth");
-    $router->get("/about", "controllers/about.php", routable: true, name: "About");
-    $router->get("/contact", "controllers/contact.php", routable: true, name: "Contact");
+    $router->get("/", "index.php", routable: true, name: "Home")->only("auth");
+    $router->get("/about", "about.php", routable: true, name: "About"); // you can add array instead of one value, Awesome!
+    $router->get("/contact", "contact.php", routable: true, name: "Contact");
 
 // ============================== Notes ==============================
-    $router->get("/notes", "controllers/notes/index.php", routable: true, name: "Notes")->only("auth");
+    $router->get("/notes", "notes/index.php", routable: true, name: "Notes")->only("auth");
 
-    $router->get("/notes/create", "controllers/notes/create.php");
-    $router->post("/notes", "controllers/notes/store.php");
+    $router->get("/notes/create", "notes/create.php")->only("auth");
+    $router->post("/notes", "notes/store.php")->only("auth");
 
 // ============================== Note ==============================
-    $router->get("/note", "controllers/notes/show.php");
+    $router->get("/note", "notes/show.php")->only("auth");
 
-    $router->get("/note/edit", "controllers/notes/edit.php");
-    $router->patch("/note", "controllers/notes/update.php");
+    $router->get("/note/edit", "notes/edit.php")->only("auth");
+    $router->patch("/note", "notes/update.php")->only("auth");
 
-    $router->delete("/note", "controllers/notes/destroy.php");
+    $router->delete("/note", "notes/destroy.php")->only("auth");
 
 // =============================== Auth ===============================
     $user = $_SESSION["user"] ?? null; // user exist? so true, else false
-    $router->get("/login", "controllers/auth/login.php", routable: !$user, name: "Login")->only("guest");
-    $router->post("/login", "controllers/auth/login.php")->only("guest");
+    $router->get("/login", "auth/login.php")->only("guest");
+    $router->post("/login", "auth/login.php")->only("guest");
 
-    $router->get("/register", "controllers/auth/register.php", routable: !$user, name: "Register")->only("guest");
-    $router->post("/register", "controllers/auth/register.php")->only("guest");
+    $router->get("/register", "auth/register.php")->only("guest");
+    $router->post("/register", "auth/register.php")->only("guest");
 
-    $router->get("/logout", "controllers/auth/logout.php", routable: !!$user, name: "Logout")->only("auth");
+    $router->get("/logout", "auth/logout.php")->only("auth");
 
 // ============================== Users ==============================
-    $router->get("/profile", "controllers/user/profile.php", routable: !!$user, name: "Profile")->only("auth");
+    $router->get("/profile", "user/profile.php")->only("auth");
 
-    $router->get("/profile/edit", "controllers/user/edit.php")->only("auth");
-    $router->put("/profile/update", "controllers/user/update.php")->only("auth");
+    $router->get("/profile/edit", "user/edit.php")->only("auth");
+    $router->put("/profile/update", "user/update.php")->only("auth");
 
     return $router->getRoutes();

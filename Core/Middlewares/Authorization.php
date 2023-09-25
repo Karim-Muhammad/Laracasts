@@ -11,6 +11,16 @@
 
         public static function handle($role) {
             if(!$role) return;
+
+            if(is_array($role)) {
+                foreach($role as $r) {
+                    static::handle($r);
+                }
+                return;
+            }
+
+//            dd($role);
+
             if(!array_key_exists($role, static::$MAP)) {
                 throw new \Exception("Role is not exist!");
             }

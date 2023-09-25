@@ -1,5 +1,7 @@
 <?php
 
+    namespace Http\Form;
+
     if ($_SERVER["REQUEST_METHOD"] === "GET") {
         view("auth/login.view.php");
         exit();
@@ -10,26 +12,12 @@
         $$key = $value;
     }
 
-// Validate Form Inputs
-    $errors = [];
-    $_SESSION["errors"] = &$errors;
+    // Validate Form Inputs
     $_SESSION["inputs"] = $_POST;
+    $form = new LoginForm();
 
-    if (\Core\Validator::email($email) === false) {
-        $errors["email"] = "Email is not valid";
-    }
-
-    // Validate Password
-    function ispassword($password)
-    {
-        return \Core\Validator::string($password, 8, 20) && preg_match("/[^0-9A-Za-z]+/", $password);
-    }
-
-    if (!\Core\Validator::custom($password, "ispassword")) {
-        $errors["password"] = "Password must contains 8-20 chars, at least one special character";
-    }
-
-    if (!empty($errors)) {
+    if(! $form->validate($email, $password)) {
+        $_SESSION["errors"] = $form->errors();
         redirect("/login");
     }
 
@@ -38,7 +26,6 @@
     $user = $db->query("SELECT * FROM users WHERE email = :email and password = :password", [
         "email" => $email,
         "password" => sha1($password)
-//        "password" => password_hash($password, PASSWORD_DEFAULT)
     ])->find();
 
 
@@ -48,4 +35,9 @@
     }
 
     $_SESSION["user"] = $user;
+
+    // each time login user, we regenerate session id to prevent session fixation attack (need explain for this)
+    session_regenerate_id();
+
+
     redirect("/");

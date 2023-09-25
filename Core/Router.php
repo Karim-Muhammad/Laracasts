@@ -20,7 +20,7 @@ class Router
         $route = [
             "method" => $method,
             "uri" => $uri,
-            "controller" => $controller,
+            "controller" => "Http/controllers/$controller",
             "name" => $name,
         ];
 

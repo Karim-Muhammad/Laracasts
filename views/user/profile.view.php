@@ -7,7 +7,7 @@
 
         <div class="bg-white relative shadow rounded-lg w-5/6 md:w-5/6  lg:w-4/6 xl:w-3/6 mx-auto">
             <div class="flex justify-center">
-                <img src="https://avatars0.githubusercontent.com/u/35900628?v=4" alt="" class="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110">
+                <img src="/images/Ninja.svg" alt="" class="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110">
             </div>
 
             <div class="mt-16">
@@ -18,7 +18,7 @@
                     <div class="mt-5 w-full flex flex-col items-center overflow-hidden text-sm">
                         <?php if($notes): ?>
                             <?php foreach($notes as $note): ?>
-                                <div class="w-full flex flex-col mb-8 bg-white shadow-md rounded-lg px-8 py-6">
+                                <div class="w-full flex flex-col bg-white border-t-2 rounded-lg px-8 py-6">
                                     <div class="flex justify-between items-center">
                                         <h1 class="font-bold text-gray-700"><?= $note['id'] ?></h1>
                                         <span class="text-sm text-gray-400"><?= $note['user_id'] ?></span>
@@ -27,10 +27,8 @@
                                 </div>
                             <?php endforeach; ?>
                         <?php else: ?>
-                            <div class="w-full flex flex-col mb-8 bg-white shadow-md rounded-lg px-8 py-6">
-                                <div class="flex justify-between items-center">
-                                    <h1 class="font-bold text-gray-700">No notes found</h1>
-                                </div>
+                            <div class="w-full flex flex-col bg-white text-center rounded-lg px-8 py-6">
+                                <h1 class="text-lg font-bold text-slate-500">No notes found</h1>
                             </div>
                         <?php endif; ?>
                     </div>

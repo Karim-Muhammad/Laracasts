@@ -7,46 +7,19 @@
         exit();
     }
 
-
-//$username = $_POST["username"];
-//$email = $_POST["email"];
-//$password = $_POST["password"];
-
-// cool way
+    // cool way
     foreach ($_POST as $key => $value) {
         $$key = $value;
     }
 
-
-// Validate Form Inputs
-    $errors = [];
-    $_SESSION["errors"] = &$errors;
     $_SESSION["inputs"] = $_POST;
+    $form = new Http\Form\RegisterForm();
 
-// Validate Username
-    if (\Core\Validator::string($username, 3, 20) === false) {
-        $errors["username"] = "Username must be between 3 and 20 characters";
-    }
-
-// Validate Email
-    if (\Core\Validator::email($email) === false) {
-        $errors["email"] = "Email is not valid";
-    }
-
-
-    // Validate Password
-    function ispassword($password)
-    {
-        return \Core\Validator::string($password, 8, 20) && preg_match("/[^0-9A-Za-z]+/", $password);
-    }
-
-    if (!\Core\Validator::custom($password, "ispassword")) {
-        $errors["password"] = "Password must contains 8-20 chars, at least one special character";
-    }
-
-    if(!empty($errors)) {
+    if (! $form->validate($username, $email, $password, $confirm_password)) {
+        $_SESSION["errors"] = $form->errors();
         redirect("/register");
     }
+
 
     // everything is valid? check if this account is exist or not
     $db = \Core\App::resolve(\Core\Database::class);
@@ -55,7 +28,7 @@
         "email" => $email,
     ])->find();
 
-    if($user) {
+    if ($user) {
         $errors["auth-msg"] = "This account is already exist!";
         redirect("/register");
     }
