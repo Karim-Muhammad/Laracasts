@@ -94,6 +94,6 @@ class Router
             Response::abort(Response::NOT_FOUND);
 
         $Method = $method;
-        require_once base_path($route["controller"]);
+        require_once base_path($route["controller"]);    
     }
 }

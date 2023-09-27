@@ -2,10 +2,10 @@
 use Http\Auth\Authenticator;
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
-    view("auth/register.view.php", [
+    return view("auth/register.view.php", [
         "heading" => "Register"
     ]);
-    exit();
+    // exit();
 }
 
 // cool way
@@ -24,5 +24,5 @@ if ($form->validate($username, $email, $password, $confirm_password)) {
     $form->error("auth-msg", "This account is already exist!");
 }
 
-$_SESSION["errors"] = $form->errors();
+$_SESSION["_flash"]["errors"] = $form->errors();
 redirect("/register");

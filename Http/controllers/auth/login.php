@@ -5,8 +5,13 @@ use Http\Auth\Authenticator;
 
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
-    view("auth/login.view.php");
-    exit();
+    return view("auth/login.view.php", [
+        "title" => "Login",
+        "errors" => $_SESSION["_flash"]["errors"] ?? [],
+        "inputs" => $_SESSION["_flash"]["inputs"] ?? [],
+    ]);
+
+    // exit();
 }
 
 // cool way
@@ -15,7 +20,8 @@ foreach ($_POST as $key => $value) {
 }
 
 // Validate Form Inputs
-$_SESSION["inputs"] = $_POST;
+$_SESSION["_flash"]["inputs"] = $_POST;
+
 $form = new LoginForm();
 
 if ($form->validate($email, $password)) {
@@ -27,5 +33,6 @@ if ($form->validate($email, $password)) {
     $form->error("auth-msg", "Email or password is not correct!");
 }
 
-$_SESSION["errors"] = $form->errors();
+$_SESSION["_flash"]["errors"] = $form->errors();
+
 redirect("/login");

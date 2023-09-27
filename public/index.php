@@ -1,7 +1,9 @@
 <?php
-// phpinfo();
+
 session_start();
+
 const ROOT = __DIR__ . "/../";
+
 require_once ROOT . "Core/functions.php";
 
 spl_autoload_register(function ($class) {
@@ -30,5 +32,9 @@ $Method = $_POST["_method"] ?? $_SERVER["REQUEST_METHOD"];
 $URI = parse_url($Uri);
 $PATH = $URI["path"];
 
-// routeToController($URI['path'], $routes);
 $router->route($PATH, $Method);
+
+$_SESSION["_flash"] = [];
+unset($_SESSION["_flash"]);
+
+

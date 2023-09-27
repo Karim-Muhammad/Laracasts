@@ -21,8 +21,7 @@
 
     $router->delete("/note", "notes/destroy.php")->only("auth");
 
-// =============================== Auth ===============================
-    $user = $_SESSION["user"] ?? null; // user exist? so true, else false
+// =============================== Auth ===============================    
     $router->get("/login", "auth/login.php")->only("guest");
     $router->post("/login", "auth/login.php")->only("guest");
 
