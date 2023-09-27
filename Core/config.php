@@ -1,10 +1,10 @@
 <?php
     return [
         "database" => [
-            "host" => "localhost",
+            "host" => "127.0.0.1",
             "port" => 3306,
             "user" => "root",
-            "dbname" => "mini_notes",
+            "dbname" => "notes_guards",
             "charset" => "utf8"
         ],
 

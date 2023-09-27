@@ -1,35 +1,34 @@
 <?php
-    session_start();
-    const ROOT = __DIR__ . "/../";
-    require_once ROOT . "Core/functions.php";
-    // dd($_SERVER);
+// phpinfo();
+session_start();
+const ROOT = __DIR__ . "/../";
+require_once ROOT . "Core/functions.php";
 
-    spl_autoload_register(function ($class) {
-        $class = str_replace("\\", DIRECTORY_SEPARATOR, $class);
-        require base_path("$class.php");
-    });
+spl_autoload_register(function ($class) {
+    $class = str_replace("\\", DIRECTORY_SEPARATOR, $class);
+    require base_path("$class.php");
+});
 
-    // Setup Container Service
-    require_once base_path("bootstrap.php");
-    // dd($db);
+// Setup Container Service
+require_once base_path("bootstrap.php");
 
-    // Setup Routers
-    $router = new Core\Router();
-    $routes = require_once base_path("routers/routes.php");
+// Setup Routers
+$router = new Core\Router();
+$routes = require_once base_path("routers/routes.php");
 
-    // for nav views
-    $routes_links = $router->getRoutableLinks();
+// for nav views
+$routes_links = $router->getRoutableLinks();
 
 
-    $Uri = $_SERVER["REQUEST_URI"];
-    $Method = $_POST["_method"] ?? $_SERVER["REQUEST_METHOD"];
+$Uri = $_SERVER["REQUEST_URI"];
+$Method = $_POST["_method"] ?? $_SERVER["REQUEST_METHOD"];
 
-    // echo $Method;
+// echo $Method;
 
-    // also there is naming convention for _method is _csrf (cross site request forgery)
+// also there is naming convention for _method is _csrf (cross site request forgery)
 
-    $URI = parse_url($Uri);
-    $PATH = $URI["path"];
+$URI = parse_url($Uri);
+$PATH = $URI["path"];
 
-    // routeToController($URI['path'], $routes);
-    $router->route($PATH, $Method);
+// routeToController($URI['path'], $routes);
+$router->route($PATH, $Method);

@@ -12,19 +12,19 @@
 
             // Validate Email
             if (Validator::email($email) === false) {
-                $errors["email"] = "Email is not valid";
+                $this->errors["email"] = "Email is not valid";
             }
 
             // Validate Password
             // study this below line
             // if (! Validator::custom($password, $this->ispassword)) {
             if (! $this->ispassword($password)) {
-                $errors["password"] = "Password must contains 8-20 chars, at least one special character";
+                $this->errors["password"] = "Password must contains 8-20 chars, at least one special character";
             }
 
             // Validate Confirm Password
             if ($password !== $confirm_password) {
-                $errors["confirm_password"] = "Confirm password is not match";
+                $this->errors["confirm_password"] = "Confirm password is not match";
             }
 
             return empty($this->errors);
