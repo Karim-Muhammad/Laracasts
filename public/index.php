@@ -34,7 +34,6 @@ $PATH = $URI["path"];
 
 $router->route($PATH, $Method);
 
-$_SESSION["_flash"] = [];
-unset($_SESSION["_flash"]);
+Core\Session::unflash();
 
 

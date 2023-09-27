@@ -4,6 +4,7 @@ namespace Http\Auth;
 
 use Core\App;
 use Core\Database;
+use Core\Session;
 
 class Authenticator
 {
@@ -51,11 +52,7 @@ class Authenticator
 
     public function logout()
     {
-        $_SESSION = [];
-        session_destroy();
-
-        $params = session_get_cookie_params();
-        setcookie("PHPSESSID", "", time() - 1, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
+        Session::destroy();
     }
 
     public function session($key, $auth_data)

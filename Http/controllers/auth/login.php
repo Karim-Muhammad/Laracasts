@@ -3,15 +3,17 @@
 use Http\Form\LoginForm;
 use Http\Auth\Authenticator;
 
+use Core\Session;
+
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
     return view("auth/login.view.php", [
         "title" => "Login",
-        "errors" => $_SESSION["_flash"]["errors"] ?? [],
-        "inputs" => $_SESSION["_flash"]["inputs"] ?? [],
+        "errors" => Session::get("errors") ?? [],
+        "inputs" => Session::get("inputs") ?? [],
     ]);
 
-    // exit();
+    // exit(); // prevented my root(index.php) from continuing
 }
 
 // cool way
@@ -20,7 +22,7 @@ foreach ($_POST as $key => $value) {
 }
 
 // Validate Form Inputs
-$_SESSION["_flash"]["inputs"] = $_POST;
+Session::flash("inputs", $_POST);
 
 $form = new LoginForm();
 
@@ -33,6 +35,6 @@ if ($form->validate($email, $password)) {
     $form->error("auth-msg", "Email or password is not correct!");
 }
 
-$_SESSION["_flash"]["errors"] = $form->errors();
+Session::flash("errors", $form->errors());
 
 redirect("/login");

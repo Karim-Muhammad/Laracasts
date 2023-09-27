@@ -1,11 +1,13 @@
 <?php
 use Http\Auth\Authenticator;
+use Core\Session;
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
     return view("auth/register.view.php", [
-        "heading" => "Register"
+        "heading" => "Register",
+        "errors" => Session::get("errors") ?? [],
+        "inputs" => Session::get("inputs") ?? [],
     ]);
-    // exit();
 }
 
 // cool way
@@ -13,7 +15,8 @@ foreach ($_POST as $key => $value) {
     $$key = $value;
 }
 
-$_SESSION["inputs"] = $_POST;
+Session::flash("inputs", $_POST);
+
 $form = new Http\Form\RegisterForm();
 
 if ($form->validate($username, $email, $password, $confirm_password)) {
@@ -24,5 +27,6 @@ if ($form->validate($username, $email, $password, $confirm_password)) {
     $form->error("auth-msg", "This account is already exist!");
 }
 
-$_SESSION["_flash"]["errors"] = $form->errors();
+Session::flash("errors", $form->errors());
+
 redirect("/register");
