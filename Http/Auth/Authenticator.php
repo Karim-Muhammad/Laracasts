@@ -19,6 +19,8 @@ class Authenticator
             "email" => $email,
         ])->find();
 
+        // dd($user);
+
         if ($user) {
             $this->errors["auth-msg"] = "This account is already exist!";
             return false;

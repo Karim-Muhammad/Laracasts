@@ -13,7 +13,8 @@ function dd($value)
 
 function purify($input)
 {
-    return htmlspecialchars(htmlentities(trim($input)));
+    return htmlentities(trim($input), ENT_QUOTES, "UTF-8");
+    // return htmlspecialchars(htmlentities(trim($input)));
 }
 
 function authorize(bool $condition): bool

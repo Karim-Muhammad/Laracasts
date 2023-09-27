@@ -1,1 +1,2 @@
-I want test all endpoints if they are working properly, may i not authorized to show specific note, but endpoint regardless it sis working
+Laravel uses 'old' as name convention to get old inputs of form
+so you may replace 'inputs' to 'old'  
