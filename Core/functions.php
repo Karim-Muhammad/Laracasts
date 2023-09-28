@@ -19,8 +19,10 @@ function purify($input)
 
 function authorize(bool $condition): bool
 {
-    if ($condition = false)
+    if ($condition === false) {
         Core\Response::abort(\Core\Response::UNAUTHORIZED);
+        die();
+    }
     return true;
 }
 

@@ -1,6 +1,6 @@
 <?php
 
-    $db = \Core\App::resolve("Core\Database");
+    $db = Core\App::resolve("Core\Database");
 
 
     $id = $_GET["id"];
@@ -12,13 +12,10 @@
      * Magic Numbers
      * They are numbers that have special meaning that didn't declared in our codebase
      */
-    $CURRENT_USER_ID = $_SESSION["user"]['id'] ?? null; // hardcoded now, but later we will use Session, Authentication
+    $CURRENT_USER_ID = Core\Session::get("user")['id'] ?? null; // hardcoded now, but later we will use Session, Authentication
+    
+    authorize((int) $note["user_id"] === (int)$CURRENT_USER_ID);
 
-    if(!$CURRENT_USER_ID) {
-        (new \Core\Middlewares\Guest)->handle();
-    }
-
-    authorize($note["user_id"] !== $CURRENT_USER_ID);
 
     view("notes/show.view.php", [
         "heading" => "Note",
