@@ -1,5 +1,6 @@
 <?php
 use Http\Auth\Authenticator;
+use Http\Form\RegisterForm;
 use Core\Session;
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
@@ -15,18 +16,18 @@ foreach ($_POST as $key => $value) {
     $$key = $value;
 }
 
-Session::flash("inputs", $_POST);
+$form = RegisterForm::validate($_POST);
 
-$form = new Http\Form\RegisterForm();
+$register = (new Authenticator)->register(...[
+    "username" => $username,
+    "email" => $email,
+    "password" => $password,
+]);
 
-if ($form->validate($username, $email, $password, $confirm_password)) {
-    if ((new Authenticator)->register($email, $password, $username)) {
-        redirect("/login");
-    }
-
-    $form->error("auth-msg", "This account is already exist!");
+if (! $register) {
+    $form
+    ->error("auth-msg", "This account is already exist!")
+    ->throws();
 }
 
-Session::flash("errors", $form->errors());
-
-redirect("/register");
+redirect("/");

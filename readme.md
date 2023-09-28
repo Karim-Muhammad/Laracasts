@@ -7,3 +7,9 @@
 
     php -S localhost:<port> -t public # run server
 ```
+
+```
+    account
+        email: admin@gmail.com
+        pass:  Admin!
+```

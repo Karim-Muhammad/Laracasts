@@ -7,8 +7,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Demo</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- <link rel="stylesheet" href="../../public/main.css"> -->
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link rel="stylesheet" href="/css/main.output.css">
 </head>
 
 <body class="h-full">
