@@ -22,19 +22,15 @@ foreach ($_POST as $key => $value) {
 }
 
 // Validate Form Inputs
-Session::flash("inputs", $_POST);
+$form = LoginForm::validate($_POST);
 
-$form = new LoginForm();
+$signIn = (new Authenticator)->login($email, $password);
 
-if ($form->validate($email, $password)) {
-    // everything is valid? check if this account is exist or not
-    if ((new Authenticator)->login($email, $password)) {
-        redirect("/");
-    }
-
-    $form->error("auth-msg", "Email or password is not correct!");
+if (! $signIn) {
+    $form
+    ->error("auth-msg", "Email or password is not correct!")
+    ->throws();    
 }
 
-Session::flash("errors", $form->errors());
 
-redirect("/login");
+redirect("/");

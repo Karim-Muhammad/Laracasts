@@ -96,4 +96,8 @@ class Router
         $Method = $method;
         require_once base_path($route["controller"]);    
     }
+
+    public function previousUrl(): string {
+        return $_SERVER["HTTP_REFERER"] ?? "/";
+    }
 }

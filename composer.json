@@ -17,5 +17,11 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true
         }
+    },
+    "autoload": {
+        "psr-4": {
+            "Core\\": "Core/",
+            "Http\\": "Http/"
+        }
     }
 }

@@ -6,17 +6,13 @@
 
     class LoginForm extends FormAuth {
 
-        public function validate($email, $password) {
-            // Validate Email
-            if (Validator::email($email) === false) {
-                $this->errors["email"] = "Email is not valid";
-            }
+        public function __construct(public array $attributes) {
+            parent::__construct($attributes);
+        }
 
-            // Validate Password
-            if (! $this->ispassword($password)) {
-                $this->errors["password"] = "Password must contains 8-255 chars, at least one special character";
-            }
+        static public function validate($attributes) {
+            $instance = new static($attributes);
 
-            return empty($this->errors);
+            return $instance->failed() ? $instance->throws() : $instance;
         }
     }

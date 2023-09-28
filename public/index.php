@@ -1,9 +1,11 @@
 <?php
+use Core\ValidationException;
+use Core\Session;
 
 session_start();
 
 const ROOT = __DIR__ . "/../";
-require ROOT . "vendor/autoload.php"; // composer autoload
+require_once ROOT . "vendor/autoload.php"; // composer autoload
 
 require_once ROOT . "Core/functions.php";
 
@@ -28,8 +30,15 @@ $Method = $_POST["_method"] ?? $_SERVER["REQUEST_METHOD"];
 $URI = parse_url($Uri);
 $PATH = $URI["path"];
 
-$router->route($PATH, $Method);
+try {
+    $router->route($PATH, $Method);
+}catch(ValidationException $exception) {
+    Session::flash("errors", $exception->errors);
+    Session::flash("inputs", $exception->old);
 
-Core\Session::unflash();
+    redirect($router->previousUrl());
+}
+
+Session::unflash();
 
 

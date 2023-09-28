@@ -16,7 +16,7 @@
 
         public function resolve($service_name) {
             // check if service exists or not
-            if(!array_key_exists($service_name, $this->services)) {
+            if(! array_key_exists($service_name, $this->services)) {
                 throw new \Exception("Service does not exist");
             }
 

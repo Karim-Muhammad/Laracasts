@@ -1,32 +1,30 @@
 <?php
 
     namespace Http\Form;
+    use Core\ValidationException;
     use Core\Validator;
 
     class RegisterForm extends FormAuth {
-        public function validate($username, $email, $password, $confirm_password) {
+
+        public function __construct(public array $attributes) {
+            parent::__construct($attributes);
+        }
+
+        static public function validate($attributes) {
+            
+            $register = new static($attributes);
+
             // Validate Username
-            if(Validator::string($username, 3, 20) === false) {
-                $this->errors["username"] = "Username must be between 3 and 20 characters";
+            if(Validator::string($attributes['username'], 3, 20) === false) {
+                $register->errors["username"] = "Username must be between 3 and 20 characters";
             }
 
-            // Validate Email
-            if (Validator::email($email) === false) {
-                $this->errors["email"] = "Email is not valid";
-            }
-
-            // Validate Password
-            // study this below line
-            // if (! Validator::custom($password, $this->ispassword)) {
-            if (! $this->ispassword($password)) {
-                $this->errors["password"] = "Password must contains 8-20 chars, at least one special character";
-            }
-
+            
             // Validate Confirm Password
-            if ($password !== $confirm_password) {
-                $this->errors["confirm_password"] = "Confirm password is not match";
+            if ($attributes['password'] !== $attributes['confirm_password']) {
+                $register->errors["confirm_password"] = "Confirm password is not match";
             }
 
-            return empty($this->errors);
+            return $register->failed() ? $register->throws() : $register;
         }
     }
