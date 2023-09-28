@@ -3,20 +3,16 @@
 session_start();
 
 const ROOT = __DIR__ . "/../";
+require ROOT . "vendor/autoload.php"; // composer autoload
 
 require_once ROOT . "Core/functions.php";
-
-spl_autoload_register(function ($class) {
-    $class = str_replace("\\", DIRECTORY_SEPARATOR, $class);
-    require base_path("$class.php");
-});
 
 // Setup Container Service
 require_once base_path("bootstrap.php");
 
 // Setup Routers
 $router = new Core\Router();
-$routes = require_once base_path("routers/routes.php");
+$routes = require_once base_path("routes.php");
 
 // for nav views
 $routes_links = $router->getRoutableLinks();
